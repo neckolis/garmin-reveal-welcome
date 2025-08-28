@@ -1,42 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* RunReveal x Garmin Microsite Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base Colors */
+    --background: 245 245 245; /* #F5F5F5 - Clean off-white */
+    --foreground: 210 22% 22%; /* Dark text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Brand Colors - Garmin Navy Primary */
+    --primary: 213 100% 26%; /* #003f87 - Garmin Navy */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* RunReveal Purple Secondary */
+    --secondary: 271 64% 43%; /* #8A2BE2 - RunReveal Purple */
+    --secondary-foreground: 0 0% 100%; /* White */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Garmin Cyan Accent */
+    --accent: 194 100% 47%; /* #00ADEF - Garmin Cyan */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neutral Tones */
+    --muted: 240 5% 96%; /* Very light gray */
+    --muted-foreground: 240 4% 46%; /* Medium gray */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Card & Surfaces */
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 210 22% 22%; /* Dark text */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Interactive Elements */
+    --border: 240 6% 90%; /* Light border */
+    --input: 240 6% 90%; /* Input background */
+    --ring: 271 64% 43%; /* RunReveal purple focus ring */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Design System Extensions */
+    --gradient-hero: linear-gradient(135deg, hsl(213 100% 26%), hsl(213 90% 35%));
+    --gradient-accent: linear-gradient(90deg, hsl(271 64% 43%), hsl(271 74% 53%));
+    --gradient-cyan: linear-gradient(90deg, hsl(194 100% 47%), hsl(194 90% 57%));
+    
+    /* Shadows */
+    --shadow-brand: 0 10px 30px -10px hsl(271 64% 43% / 0.3);
+    --shadow-elegant: 0 4px 20px -2px hsl(213 100% 26% / 0.1);
+    --shadow-glow: 0 0 40px hsl(194 100% 47% / 0.4);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Spacing & Layout */
+    --radius: 0.75rem;
+    --section-padding: 5rem;
+    --container-padding: 2rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +114,91 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+}
+
+@layer components {
+  /* Brand Button Variants */
+  .btn-runreveal {
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium px-8 py-3 rounded-xl transition-all duration-300 shadow-brand hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-garmin {
+    @apply bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:shadow-glow hover:scale-105;
+  }
+
+  .btn-hero {
+    @apply bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-secondary-foreground font-semibold px-10 py-4 rounded-xl transition-all duration-300 shadow-brand hover:shadow-xl hover:scale-105;
+  }
+
+  /* Brand Gradients */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-cyan {
+    background: var(--gradient-cyan);
+  }
+
+  /* Video Frame Styling */
+  .video-frame {
+    @apply relative rounded-2xl overflow-hidden;
+    box-shadow: 0 0 0 3px hsl(var(--accent)), 0 0 0 6px hsl(var(--secondary));
+  }
+
+  /* Glow Effects */
+  .glow-purple {
+    filter: drop-shadow(0 0 20px hsl(var(--secondary) / 0.5));
+  }
+
+  .glow-cyan {
+    filter: drop-shadow(0 0 20px hsl(var(--accent) / 0.5));
+  }
+
+  /* Text Animations */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .fade-in-delay {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .fade-in-delay-2 {
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px hsl(var(--accent) / 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px hsl(var(--accent) / 0.6));
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
