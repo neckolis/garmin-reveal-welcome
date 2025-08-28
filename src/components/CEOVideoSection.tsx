@@ -4,10 +4,10 @@ const CEOVideoSection = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-foreground mb-4 fade-in-up">
-            A Message From Our CEO
+            A Security Message From Our CEO
           </h2>
           <p className="text-xl text-muted-foreground mb-12 fade-in-delay">
-            A special message from our CEO, just for Garmin
+            Why RunReveal was built for teams like yours—a personal message from our CEO
           </p>
           
           <div className="video-frame max-w-3xl mx-auto fade-in-delay-2">
